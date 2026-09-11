@@ -5,6 +5,9 @@ import { LAYOUT_END, LAYOUT_START, type DashboardSettings, type DynamicWidth, ty
 export const WIDGET_ORDER = ["quick-actions", "modules", "quote-of-day", "recently-changed", "favorites", "active-projects", "recent-journal", "vault-pulse"];
 export const DYNAMIC_COLUMNS: Record<DynamicWidth, number> = { full: 12, half: 6, third: 4, quarter: 3 };
 
+// These defaults are portable and intentionally contain no vault-specific
+// folder names. Legacy flat keys remain alongside Foundation groups so older
+// installations can upgrade without losing settings.
 export function defaultSettings(): DashboardSettings {
   const rootFolder = "Dashboard";
   const files = { index: "Library Index.md", summary: "Summary.md", journal: "Migration Journal.md", layout: "Layout.md" };
@@ -72,6 +75,8 @@ export function normalizeSettings(raw: unknown): DashboardSettings {
   } as DashboardSettings;
 }
 
+// Keep every persisted layout bounded to the twelve-column grid and merge new
+// widget defaults with layouts saved by earlier plugin versions.
 export function emptyLayout(id: string, index = 99, partial: Partial<WidgetLayout> = {}): WidgetLayout {
   return {
     x: number(partial.x, 1, 1, 12),
@@ -114,6 +119,8 @@ export function readManagedLayout(note: string): Record<string, WidgetLayout> | 
 }
 
 export function renderLayoutNote(settings: DashboardSettings, layout: Record<string, WidgetLayout>, existing = ""): string {
+  // Only the bounded JSON block is managed. Any user-authored Markdown around
+  // it, including comments and instructions, is preserved byte-for-byte.
   const body = JSON.stringify(layout, null, 2);
   const frontmatter = existing.startsWith("---\n") ? existing.slice(0, existing.indexOf("\n---\n", 4) + 5) : `---\ntype: red-beard-dashboard-layout\nschema_version: 1\nsource: ${JSON.stringify(settings.legacyPath)}\n---\n\n`;
   const content = existing.startsWith("---\n") ? existing.slice(frontmatter.length) : existing;

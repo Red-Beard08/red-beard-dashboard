@@ -10,6 +10,8 @@ export class DashboardView extends ItemView {
   getDisplayText(): string { return "Red-Beard Dashboard"; }
   async onOpen(): Promise<void> { await this.render(); }
 
+  // Rebuild the view from vault state. Rendering is intentionally read-only;
+  // layout changes are saved only by explicit editor actions.
   async render(): Promise<void> {
     const root = this.containerEl;
     root.empty();
@@ -25,9 +27,6 @@ export class DashboardView extends ItemView {
     const header = root.createDiv({ cls: "rbd-header" });
     header.createEl("h1", { text: "Red-Beard Dashboard" });
     header.createEl("p", { text: "A native, extensible homepage for your vault." });
-    const guide = root.createDiv({ cls: "rbd-guide" });
-    guide.createEl("strong", { text: "How to use this page" });
-    guide.createEl("p", { text: "Use Quick Actions to start common workflows, Modules to open an add-on dashboard, and the card controls to review your vault at a glance. Choose Edit layout on desktop to move or resize cards; changes are saved to the managed layout note." });
     const toolbar = header.createDiv({ cls: "rbd-toolbar" });
     this.button(toolbar, this.plugin.editing ? "Done editing" : "Edit layout", () => this.plugin.toggleEditor());
     this.button(toolbar, "Refresh", () => void this.plugin.refreshViews());
@@ -50,9 +49,7 @@ export class DashboardView extends ItemView {
       card.style.setProperty("--rbd-h", String(layout.h));
       if (this.plugin.editing && !layout.locked) this.addEditorControls(card, grid, definition, layout);
       const title = card.createDiv({ cls: "rbd-widget-title" });
-      const heading = title.createDiv({ cls: "rbd-widget-heading" });
-      heading.createEl("span", { text: definition.name });
-      if (definition.description) heading.createEl("small", { cls: "rbd-widget-description", text: definition.description });
+      title.createEl("span", { text: definition.name });
       if (this.plugin.editing) this.addLayoutControls(title, layout);
       const body = card.createDiv({ cls: "rbd-widget-body" });
       try { await definition.render(this.plugin.context(), body); }
@@ -78,6 +75,8 @@ export class DashboardView extends ItemView {
   }
 
   private addEditorControls(card: HTMLElement, grid: HTMLElement, definition: DashboardWidgetDefinition, layout: WidgetLayout): void {
+    // The drag handle and external drop zones keep placement discoverable on
+    // desktop while remaining hidden in the mobile view.
     card.addClass("rbd-editing");
     const handle = card.createDiv({ cls: "rbd-drag-handle", text: "⋮⋮ Drag" });
     handle.draggable = true;

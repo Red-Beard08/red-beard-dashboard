@@ -8,6 +8,8 @@ export class DashboardSettingsTab extends PluginSettingTab {
     const container = this.containerEl;
     container.empty();
     container.createEl("h2", { text: "Red-Beard Dashboard" });
+    // Settings follow the shared Foundation headings so users can find the
+    // same storage, UI, automation, and maintenance controls in every add-on.
     new Setting(container).setName("Storage").setHeading();
     new Setting(container).setName("Root folder").setDesc("Vault-relative base folder for dashboard configuration and widget definitions.").addText(text => text.setValue(this.plugin.settings.rootFolder).onChange(async value => { this.plugin.settings.rootFolder = normalizeSettings({ ...this.plugin.settings, rootFolder: value }).rootFolder; await this.plugin.saveSettings(); }));
     new Setting(container).setName("Dashboard configuration note").setDesc("Vault-relative Markdown note containing the saved layout.").addText(text => text.setValue(this.plugin.settings.dashboardPath).onChange(async value => { this.plugin.settings.dashboardPath = normalizeSettings({ ...this.plugin.settings, dashboardPath: value }).dashboardPath; await this.plugin.saveSettings(); }));

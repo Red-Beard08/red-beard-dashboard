@@ -15,6 +15,8 @@ const VIEW_FALLBACKS: Record<string, string> = {
   "prayer-library:open-dashboard": "prayer-library-dashboard"
 };
 
+// Commands are the preferred integration seam. View IDs are retained only as
+// a fallback for older or disabled Red-Beard add-ons.
 function execute(app: App, commandOrView: string): void {
   const commands = (app as App & { commands?: { executeCommandById: (id: string) => boolean } }).commands;
   if (commands?.executeCommandById(commandOrView)) return;
@@ -23,6 +25,8 @@ function execute(app: App, commandOrView: string): void {
 }
 
 function parseFrontmatter(content: string): Record<string, string | boolean> {
+  // Markdown widget definitions are deliberately limited to flat scalar
+  // frontmatter; JavaScript in widget notes is never evaluated.
   if (!content.startsWith("---\n")) return {};
   const end = content.indexOf("\n---\n", 4);
   if (end < 0) return {};
@@ -150,6 +154,8 @@ export default class RedBeardDashboard extends Plugin {
   }
 
   private registerNativeWidgets(): void {
+    // Built-in widgets query Obsidian's Vault API directly so the dashboard
+    // remains useful without Dataview, Templater, or another plugin.
     this.registerWidget({ id: "quick-actions", name: "Quick Actions", description: "Start common workflows without leaving the homepage.", defaultLayout: this.layoutForId("quick-actions"), render: (_, container) => {
       [["New Quote", "quote-library:add-quote"], ["New Scripture", "scripture-library:add-passage"], ["Pray Now", "prayer-library:pray-now"], ["New Prayer", "prayer-library:add-prayer"], ["New Movie", "movie-library:manual-entry"], ["New Interaction", "shepherds-ledger:record-interaction"]].forEach(([label, command]) => { const button = container.createEl("button", { text: label }); button.onclick = () => execute(this.app, command); });
     } });
