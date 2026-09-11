@@ -4,7 +4,7 @@ An extensible, responsive Obsidian homepage by Red-Beard. It provides native vau
 
 ## Install and use
 
-Copy `main.js`, `manifest.json`, and `styles.css` to `.obsidian/plugins/red-beard-dashboard/`, enable the plugin, and use the ribbon icon or **Open dashboard** command. Open **Settings** to configure the dashboard and legacy paths. The original `Red-Beard's Dashboard.md` is never overwritten.
+Copy `main.js`, `manifest.json`, and `styles.css` to `.obsidian/plugins/red-beard-dashboard/`, enable the plugin, and use the ribbon icon or **Open dashboard** command. Open **Settings** to configure the dashboard and optional legacy paths. The configured legacy note is never overwritten.
 
 Use **Import/re-import legacy dashboard** to create `Dashboard/Layout.md` and establish the current homepage as the visual baseline. Use **Edit layout** on desktop to drag widgets, change desktop width (`W`), mobile width (`M`), height (`H`), and lock widgets. Mobile uses the saved widths and remains view-first.
 
