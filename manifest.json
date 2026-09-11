@@ -1,0 +1,9 @@
+{
+  "id": "red-beard-dashboard",
+  "name": "Red-Beard Dashboard",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "An extensible, responsive Obsidian homepage dashboard.",
+  "author": "Red-Beard",
+  "isDesktopOnly": false
+}
