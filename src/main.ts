@@ -12,7 +12,8 @@ const VIEW_FALLBACKS: Record<string, string> = {
   "mens-study-planner:open-dashboard": "mens-study-planner-dashboard",
   "marriage-companion:open-dashboard": "marriage-companion-dashboard",
   "vault-backup:open-dashboard": "vault-backup-dashboard",
-  "prayer-library:open-dashboard": "prayer-library-dashboard"
+  "prayer-library:open-dashboard": "prayer-library-dashboard",
+  "journal-companion:open-dashboard": "journal-companion-dashboard"
 };
 
 // Commands are the preferred integration seam. View IDs are retained only as
@@ -157,10 +158,10 @@ export default class RedBeardDashboard extends Plugin {
     // Built-in widgets query Obsidian's Vault API directly so the dashboard
     // remains useful without Dataview, Templater, or another plugin.
     this.registerWidget({ id: "quick-actions", name: "Quick Actions", description: "Start common workflows without leaving the homepage.", defaultLayout: this.layoutForId("quick-actions"), render: (_, container) => {
-      [["New Quote", "quote-library:add-quote"], ["New Scripture", "scripture-library:add-passage"], ["Pray Now", "prayer-library:pray-now"], ["New Prayer", "prayer-library:add-prayer"], ["New Movie", "movie-library:manual-entry"], ["New Interaction", "shepherds-ledger:record-interaction"]].forEach(([label, command]) => { const button = container.createEl("button", { text: label }); button.onclick = () => execute(this.app, command); });
+      [["New Quote", "quote-library:add-quote"], ["New Scripture", "scripture-library:add-passage"], ["New Prayer", "prayer-library:add-prayer"], ["New Journal Entry", "journal-companion:new-today"], ["Pray Now", "prayer-library:pray-now"], ["New Movie", "movie-library:manual-entry"], ["New Interaction", "shepherds-ledger:record-interaction"]].forEach(([label, command]) => { const button = container.createEl("button", { text: label }); button.onclick = () => execute(this.app, command); });
     } });
     this.registerWidget({ id: "modules", name: "Modules", description: "Open a Red-Beard add-on dashboard or module.", defaultLayout: this.layoutForId("modules"), render: (_, container) => {
-      [["Quote Library", "quote-library:open-dashboard"], ["Scripture Library", "scripture-library:open-dashboard"], ["Movie Library", "movie-library:open-dashboard"], ["Study Planner", "study-planner:open-dashboard"], ["Family Companion", "marriage-companion:open-dashboard"], ["Vault Backup", "vault-backup:open-dashboard"], ["Prayer Library", "prayer-library:open-dashboard"]].forEach(([label, command]) => { const button = container.createEl("button", { text: label }); button.onclick = () => execute(this.app, command); });
+      [["Quote Library", "quote-library:open-dashboard"], ["Scripture Library", "scripture-library:open-dashboard"], ["Movie Library", "movie-library:open-dashboard"], ["Study Planner", "study-planner:open-dashboard"], ["Family Companion", "marriage-companion:open-dashboard"], ["Vault Backup", "vault-backup:open-dashboard"], ["Prayer Library", "prayer-library:open-dashboard"], ["Journal Companion", "journal-companion:open-dashboard"]].forEach(([label, command]) => { const button = container.createEl("button", { text: label }); button.onclick = () => execute(this.app, command); });
     } });
     this.registerWidget({ id: "quote-of-day", name: "Quote of the Day", description: "Shows the most recently changed note in your quote area.", defaultLayout: this.layoutForId("quote-of-day"), render: (_, container) => { const file = this.app.vault.getMarkdownFiles().filter(item => item.path.toLowerCase().includes("quotes")).sort((a, b) => b.stat.mtime - a.stat.mtime)[0]; container.createEl("p", { text: file ? `Latest quote note: ${file.basename}` : "Your saved quotes will appear here." }); } });
     this.registerWidget({ id: "recently-changed", name: "Recently Changed", description: "The eight vault files with the newest modification times.", defaultLayout: this.layoutForId("recently-changed"), render: (_, container) => { const list = container.createEl("ul"); this.app.vault.getFiles().sort((a, b) => b.stat.mtime - a.stat.mtime).slice(0, 8).forEach(file => { const item = list.createEl("li"); const link = item.createEl("a", { text: file.path }); link.onclick = () => this.openNote(file.path); }); } });
