@@ -1,16 +1,16 @@
-# Red-Beard Dashboard 1.1.0
+# Red-Beard Dashboard 1.2.0
 
-An extensible, responsive Obsidian homepage by Red-Beard. It provides native vault widgets, a desktop drag-and-drop grid editor, and a stable registration API for other plugins. This release follows the Red-Beard Add-on Foundation contract while remaining self-contained: no local machine path or Foundation workspace dependency is required.
+An extensible, responsive Obsidian homepage by Red-Beard. It recreates the visual rhythm of an existing Red-Beard homepage while using native Markdown widgets and a Foundation-shaped registration API. The original page is never overwritten.
 
 ## Install and use
 
-Copy `main.js`, `manifest.json`, and `styles.css` to `.obsidian/plugins/red-beard-dashboard/`, enable the plugin, and use the ribbon icon or **Open dashboard** command. Open **Settings** to configure the vault-relative root, layout note, widget-definition folder, legacy path, responsive breakpoint, spacing, refresh behavior, and startup behavior. Paths are normalized and cannot escape the vault. The configured legacy note is never overwritten.
+Copy `main.js`, `manifest.json`, and `styles.css` to `.obsidian/plugins/red-beard-dashboard/`, enable the plugin, and use the ribbon icon or **Open dashboard** command. The dashboard is mobile-compatible and uses a 12-column desktop grid that becomes one column on narrow screens. Open **Settings** to configure storage paths, spacing, breakpoint, refresh, startup, and maintenance actions.
 
-Use **Import/re-import legacy dashboard** to create the managed configuration note (default `Dashboard/Layout.md`) and establish the current homepage as the visual baseline. Use **Edit layout** on desktop to drag widgets into the shaded top/left/right/bottom drop zones, change desktop width (`W`), mobile width (`M`), height (`H`), and lock widgets. Mobile uses the saved widths, collapses to one column at the configured breakpoint, and remains view-first.
+Use **Edit layout** to expose safe drag handles and precise width/mobile-width/height controls. Use **Import/re-import legacy dashboard** only when you want to reorder the native widgets from the legacy page; the source note remains byte-for-byte untouched. Migration and maintenance controls are intentionally kept in Settings.
 
 ## Widget extensions
 
-Other plugins can obtain the plugin instance and call `registerWidget(definition)`. Definitions provide a stable `id`, display `name`, `defaultLayout`, optional `mobile` behavior/settings schema, and a `render(context, container)` function. The context follows the Foundation contract (`app`, `vault`, `settings`, `refresh`, `openNote`, and `notice`) and adds the current dashboard layout. The returned function unregisters the widget safely; saved layouts are retained if a contributing plugin is temporarily unavailable.
+Other plugins can obtain the plugin instance and call `registerWidget(definition)`. Definitions provide a stable `id`, display `name`, optional `defaultLayout`, and a `render(context, container)` function. The context follows the Foundation contract (`app`, `vault`, `settings`, `refresh`, `openNote`, and `notice`) and adds the current layout. Unregistering a widget removes it from the view without deleting its saved layout.
 
 Markdown widget definitions may be placed in `Dashboard/Widgets/` with `type: dashboard-widget`, `widget_id`, `title`, and `enabled` properties. Markdown definitions reference built-in renderers only and never execute arbitrary JavaScript.
 
