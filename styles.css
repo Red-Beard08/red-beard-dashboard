@@ -9,3 +9,8 @@
 /* Editor behavior: saved coordinates now directly control the native grid. */
 .rbd-widget{grid-column:var(--rbd-x)/span var(--rbd-w);min-height:calc(104px * var(--rbd-h))}.rbd-widget.rbd-editing{overflow:visible}.rbd-widget-controls{gap:8px}.rbd-field{display:inline-flex;align-items:center;gap:3px;color:var(--text-muted);font-size:.72em;font-weight:600}.rbd-field input{width:42px!important}.rbd-drop-zone{position:absolute;z-index:3;display:none;align-items:center;justify-content:center;border:1px dashed var(--rbd-accent);border-radius:8px;background:color-mix(in srgb,var(--rbd-accent) 13%,var(--background-primary));color:var(--rbd-accent);font-size:.68em;font-weight:700;letter-spacing:.05em;text-transform:uppercase}.rbd-editing .rbd-drop-zone{display:flex}.rbd-drop-top,.rbd-drop-bottom{left:18%;right:18%;height:18px}.rbd-drop-top{top:-28px}.rbd-drop-bottom{bottom:-28px}.rbd-drop-left,.rbd-drop-right{top:18%;bottom:18%;width:18px}.rbd-drop-left{left:-28px}.rbd-drop-right{right:-28px}.rbd-zone-active{background:var(--rbd-accent);color:#fff;box-shadow:0 0 0 3px var(--rbd-accent-soft)}
 @media(max-width:600px){.rbd-widget{grid-column:1!important;min-height:0}.rbd-drop-zone{display:none!important}}
+
+/* Keep the editor's 1–12 values meaningful at every responsive width. */
+.rbd-grid{grid-template-columns:repeat(12,minmax(0,1fr))}.rbd-widget{grid-column:var(--rbd-x)/span var(--rbd-w)}
+@media(max-width:900px){.rbd-grid{grid-template-columns:repeat(12,minmax(0,1fr))}.rbd-widget{grid-column:span var(--rbd-mobile-span)}}
+@media(max-width:600px){.rbd-grid{grid-template-columns:minmax(0,1fr)}.rbd-widget{grid-column:1!important}}
