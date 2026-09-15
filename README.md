@@ -1,4 +1,4 @@
-# Red-Beard Dashboard 1.2.0
+# Red-Beard Dashboard 1.3.0
 
 An extensible, responsive Obsidian homepage by Red-Beard. It recreates the visual rhythm of an existing Red-Beard homepage while using native Markdown widgets and a Foundation-shaped registration API. The original page is never overwritten.
 
@@ -12,7 +12,7 @@ Use **Edit layout** to expose safe drag handles and precise width/mobile-width/h
 
 Other plugins can obtain the plugin instance and call `registerWidget(definition)`. Definitions provide a stable `id`, display `name`, optional `defaultLayout`, and a `render(context, container)` function. The context follows the Foundation contract (`app`, `vault`, `settings`, `refresh`, `openNote`, and `notice`) and adds the current layout. Unregistering a widget removes it from the view without deleting its saved layout.
 
-Other add-ons can also expose a dashboard button through `registerModule({ id, name, command, icon, description, order })`. Registered modules appear in the Dashboards card and in Settings, where users can enable or disable them. Module ownership lives with the contributing add-on, so a disabled or unavailable add-on disappears automatically while its visibility preference is retained.
+Other add-ons can also expose a dashboard button through `registerModule({ id, name, command, icon, description, order })`. Registered modules appear in the Modules card and in Settings, where users can enable or disable them. Module ownership lives with the contributing add-on, so a disabled or unavailable add-on disappears automatically while its visibility preference is retained. Registration tolerates slow plugin startup, so modules such as Vault Backup can appear even when their add-on loads after the dashboard.
 
 Markdown widget definitions may be placed in `Dashboard/Widgets/` with `type: dashboard-widget`, `widget_id`, `title`, and `enabled` properties. Markdown definitions reference built-in renderers only and never execute arbitrary JavaScript.
 
