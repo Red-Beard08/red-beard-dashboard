@@ -12,7 +12,7 @@ Use **Edit layout** to expose safe drag handles and precise width/mobile-width/h
 
 Other plugins can obtain the plugin instance and call `registerWidget(definition)`. Definitions provide a stable `id`, display `name`, optional `defaultLayout`, and a `render(context, container)` function. The context follows the Foundation contract (`app`, `vault`, `settings`, `refresh`, `openNote`, and `notice`) and adds the current layout. Unregistering a widget removes it from the view without deleting its saved layout.
 
-Other add-ons can also expose a dashboard button through `registerModule({ id, name, command, icon, description })`. Registered modules appear in the Dashboards card and in Settings, where users can enable or disable them. The built-in modules include Quotes, Scripture, Movies, Study Planner, Family, Vault Backup, Prayer, and Journal; the registry is intentionally open to future add-ons.
+Other add-ons can also expose a dashboard button through `registerModule({ id, name, command, icon, description, order })`. Registered modules appear in the Dashboards card and in Settings, where users can enable or disable them. Module ownership lives with the contributing add-on, so a disabled or unavailable add-on disappears automatically while its visibility preference is retained.
 
 Markdown widget definitions may be placed in `Dashboard/Widgets/` with `type: dashboard-widget`, `widget_id`, `title`, and `enabled` properties. Markdown definitions reference built-in renderers only and never execute arbitrary JavaScript.
 
