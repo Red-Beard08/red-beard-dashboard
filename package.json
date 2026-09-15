@@ -1,6 +1,6 @@
 {
   "name": "red-beard-dashboard",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "main.js",
   "scripts": { "build": "node esbuild.config.mjs production", "typecheck": "tsc --noEmit", "validate": "node scripts/validate-build.mjs && node scripts/validate-portability.mjs", "test": "npm run typecheck && npm run build && npm run validate" },
   "devDependencies": { "@types/node": "^22.10.0", "builtin-modules": "^4.0.0", "esbuild": "^0.25.0", "obsidian": "latest", "typescript": "^5.7.0" },
