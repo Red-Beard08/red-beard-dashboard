@@ -10,6 +10,27 @@
 .rbd-widget{grid-column:var(--rbd-x)/span var(--rbd-w);min-height:calc(104px * var(--rbd-h))}.rbd-widget.rbd-editing{overflow:visible}.rbd-widget-controls{gap:8px}.rbd-field{display:inline-flex;align-items:center;gap:3px;color:var(--text-muted);font-size:.72em;font-weight:600}.rbd-field input{width:42px!important}.rbd-drop-zone{position:absolute;z-index:3;display:none;align-items:center;justify-content:center;border:1px dashed var(--rbd-accent);border-radius:8px;background:color-mix(in srgb,var(--rbd-accent) 13%,var(--background-primary));color:var(--rbd-accent);font-size:.68em;font-weight:700;letter-spacing:.05em;text-transform:uppercase}.rbd-editing .rbd-drop-zone{display:flex}.rbd-drop-top,.rbd-drop-bottom{left:18%;right:18%;height:18px}.rbd-drop-top{top:-28px}.rbd-drop-bottom{bottom:-28px}.rbd-drop-left,.rbd-drop-right{top:18%;bottom:18%;width:18px}.rbd-drop-left{left:-28px}.rbd-drop-right{right:-28px}.rbd-zone-active{background:var(--rbd-accent);color:#fff;box-shadow:0 0 0 3px var(--rbd-accent-soft)}
 @media(max-width:600px){.rbd-widget{grid-column:1!important;min-height:0}.rbd-drop-zone{display:none!important}}
 
+/* Shared card language for connected Red-Beard modules.  Keep this additive so
+   existing layouts and user themes continue to work. */
+.rbd-widget-title{margin-bottom:12px}
+.rbd-widget-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;color:var(--rbd-accent)}
+.rbd-widget-icon svg{width:15px;height:15px;stroke-width:2.2}
+.rbd-action-grid{display:flex;flex-wrap:wrap;gap:9px;width:100%}
+.rbd-module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;width:100%}
+.rbd-module-button{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:100%;min-height:48px!important;padding:8px 12px!important;text-align:left;white-space:normal!important}
+.rbd-module-icon{display:inline-flex;flex:0 0 20px;align-items:center;justify-content:center;color:var(--rbd-accent)}
+.rbd-module-icon svg{width:18px;height:18px;stroke-width:2.1}
+.rbd-module-copy{display:flex;min-width:0;flex-direction:column;gap:2px}
+.rbd-module-label{font-weight:650;line-height:1.2}
+.rbd-module-description{overflow:hidden;color:var(--text-muted);font-size:.72rem;line-height:1.25;text-overflow:ellipsis;white-space:nowrap}
+.rbd-empty-state{width:100%;padding:8px 0;color:var(--text-muted)}
+.rbd-empty-state p{margin:0}.rbd-empty-state small{display:block;margin-top:3px;color:var(--text-faint)}
+.rbd-muted{color:var(--text-muted)}.rbd-pulse-metric{font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
+.rbd-link-list{list-style:none!important;padding-left:0!important}.rbd-link-row{display:flex;align-items:center;min-height:30px;margin:2px 0!important;padding:3px 8px;border-radius:8px;transition:background .15s ease}.rbd-link-row:before{content:"";width:5px;height:5px;margin-right:9px;border-radius:50%;background:var(--text-muted);opacity:.7}.rbd-link-row:hover{background:var(--background-modifier-hover)}
+.rbd-widget-body blockquote{margin:0;padding:16px 18px;font-size:1.04em;line-height:1.65}
+.rbd-quote-card{display:flex;width:100%;flex-direction:column;gap:10px}.rbd-quote-text{font-family:var(--font-text);font-size:1.08em}.rbd-quote-footer{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;padding:0 4px;color:var(--text-muted);font-size:.86em}.rbd-quote-author{font-weight:650;color:var(--text-normal)}.rbd-quote-source{color:var(--text-faint)}.rbd-secondary-button{align-self:flex-start;margin-top:2px!important}
+@media(max-width:600px){.rbd-module-grid{grid-template-columns:1fr}.rbd-module-button{min-height:52px!important}.rbd-module-description{white-space:normal}}
+
 /* Keep the editor's 1–12 values meaningful at every responsive width. */
 .rbd-grid{grid-template-columns:repeat(12,minmax(0,1fr))}.rbd-widget{grid-column:span var(--rbd-w)}
 @media(max-width:900px){.rbd-grid{grid-template-columns:repeat(12,minmax(0,1fr))}.rbd-widget{grid-column:span var(--rbd-mobile-span)}}
