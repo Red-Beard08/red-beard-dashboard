@@ -41,3 +41,13 @@
 .rbd-grid .rbd-widget{grid-column:var(--rbd-x)/span var(--rbd-w);grid-row:span var(--rbd-h);min-height:104px;height:auto;}
 @media(max-width:900px){.rbd-grid .rbd-widget{grid-column:var(--rbd-x)/span var(--rbd-w);}}
 @media(max-width:600px){.rbd-grid .rbd-widget{grid-column:1!important;grid-row:auto;}}
+
+/* Editing chrome stays over the card so height units describe the card itself. */
+.rbd-widget.rbd-editing{position:relative}
+.rbd-widget.rbd-editing .rbd-drag-handle{position:absolute;z-index:5;top:8px;left:10px;margin:0;padding:3px 7px;border:1px solid var(--rbd-border);background:var(--background-modifier-hover);font-size:.72em}
+.rbd-widget.rbd-editing .rbd-widget-title{padding-left:66px}
+.rbd-widget.rbd-editing .rbd-drop-bottom{display:none!important}
+.rbd-column-drop-grid{display:grid;grid-column:1/-1;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;margin:2px 0 24px}
+.rbd-column-drop-zone{grid-column:span 4;display:flex;align-items:center;justify-content:center;min-height:58px;border:1px dashed color-mix(in srgb,var(--rbd-accent) 65%,var(--rbd-border));border-radius:14px;background:color-mix(in srgb,var(--rbd-accent) 7%,transparent);color:var(--rbd-accent);font-size:.78em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;transition:background .15s ease,box-shadow .15s ease}
+.rbd-column-drop-zone:hover,.rbd-column-drop-zone.rbd-zone-active{background:color-mix(in srgb,var(--rbd-accent) 18%,transparent);box-shadow:0 0 0 2px var(--rbd-accent-soft)}
+@media(max-width:600px){.rbd-column-drop-grid{grid-template-columns:1fr;gap:10px}.rbd-column-drop-zone{grid-column:1;min-height:50px}.rbd-widget.rbd-editing .rbd-widget-title{padding-left:58px}}
