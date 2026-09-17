@@ -78,3 +78,16 @@
 .rbd-is-editing .rbd-drop-zone.rbd-zone-active{background:var(--rbd-accent);opacity:1}
 .rbd-is-editing .rbd-drag-handle{top:7px;left:8px;max-width:58px;overflow:hidden;padding:2px 5px;font-size:.62rem;line-height:1.2;white-space:nowrap}
 .rbd-is-editing .rbd-widget-title{padding-right:6px}
+
+/* The editor uses a measured masonry canvas. CSS grid rows are shared across
+   columns, which is useful for the finished dashboard but creates large blank
+   bands while arranging cards. Each card is therefore packed against the
+   current height of the columns it occupies; multi-column cards still push all
+   of their columns down together. */
+.rbd-is-editing .rbd-grid.rbd-editing-masonry{display:block;position:relative;min-height:120px;grid-template-columns:none;grid-auto-rows:none;gap:0}
+.rbd-is-editing .rbd-grid.rbd-editing-masonry>.rbd-widget{position:absolute;box-sizing:border-box;left:var(--rbd-edit-left);top:var(--rbd-edit-top);width:var(--rbd-edit-width);grid-column:auto!important;grid-row:auto!important}
+
+@media(max-width:600px){
+  .rbd-is-editing .rbd-grid.rbd-editing-masonry{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:minmax(120px,auto);gap:var(--rbd-gap);min-height:0!important}
+  .rbd-is-editing .rbd-grid.rbd-editing-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important}
+}
