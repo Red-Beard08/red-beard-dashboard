@@ -6,7 +6,7 @@ export class DashboardView extends ItemView {
   constructor(leaf:WorkspaceLeaf,private plugin:RedBeardDashboard){super(leaf);}
   getViewType(){return "red-beard-dashboard-view";} getDisplayText(){return "Red-Beard Dashboard";} getIcon(){return "layout-dashboard";}
   async onOpen(){await this.render();}
-  async render(){const root=this.containerEl;root.empty();root.addClass("red-beard-dashboard");root.style.setProperty("--rbd-gap",`${this.plugin.settings.gap}px`);root.style.setProperty("--rbd-padding",`${this.plugin.settings.padding}px`);
+  async render(){const root=this.containerEl;root.empty();root.addClass("red-beard-dashboard");root.toggleClass("rbd-is-editing",this.plugin.editing);root.style.setProperty("--rbd-gap",`${this.plugin.settings.gap}px`);root.style.setProperty("--rbd-padding",`${this.plugin.settings.padding}px`);
     const hero=root.createDiv({cls:"rbd-hero"});hero.createDiv({cls:"rbd-eyebrow",text:"RED-BEARD · PERSONAL KNOWLEDGE VAULT"});hero.createEl("h1",{text:"Welcome home."});hero.createEl("p",{text:new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"})});
     const toolbar=root.createDiv({cls:"rbd-toolbar"});this.btn(toolbar,this.plugin.editing?"Done editing":"Edit layout",()=>this.plugin.toggleEditor());this.btn(toolbar,"Refresh",()=>void this.plugin.refreshViews());this.btn(toolbar,"Legacy dashboard",()=>this.plugin.openNote(this.plugin.settings.legacyPath));this.btn(toolbar,"Settings",()=>this.plugin.openSettings());
     const grid=root.createDiv({cls:"rbd-grid"});const items=[...this.plugin.widgets.values()].sort((a,b)=>(this.plugin.layout[a.id]?.order??99)-(this.plugin.layout[b.id]?.order??99));

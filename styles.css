@@ -61,3 +61,20 @@
 .rbd-widget.rbd-editing .rbd-drop-left{left:-17px}.rbd-widget.rbd-editing .rbd-drop-right{right:-17px}
 .rbd-widget.rbd-editing .rbd-drop-top{height:14px;top:-21px;left:22%;right:22%;font-size:.62em;opacity:.88}
 .rbd-widget.rbd-editing .rbd-drag-handle{letter-spacing:.02em;text-transform:uppercase}
+
+/* Editing is an inspection mode, so content always wins over the saved
+   compact height.  Auto-sized tracks keep long lists and controls inside the
+   card instead of letting them paint over the next widget.  The saved height
+   remains visible/editable, while the preview grows enough to be usable. */
+.rbd-is-editing .rbd-grid{grid-auto-flow:row;grid-auto-rows:minmax(120px,auto);align-items:stretch}
+.rbd-is-editing .rbd-grid .rbd-widget{min-height:120px;height:auto;overflow:visible}
+.rbd-is-editing .rbd-widget-body{min-height:0}
+
+/* Keep insertion affordances in the grid gap, never over the widget body. */
+.rbd-is-editing .rbd-drop-top{top:-14px;height:9px;left:24%;right:24%;font-size:0}
+.rbd-is-editing .rbd-drop-left,.rbd-is-editing .rbd-drop-right{top:22%;bottom:22%;width:6px;font-size:0;opacity:.55}
+.rbd-is-editing .rbd-drop-left{left:-11px}.rbd-is-editing .rbd-drop-right{right:-11px}
+.rbd-is-editing .rbd-drop-zone{border-radius:5px;background:color-mix(in srgb,var(--rbd-accent) 5%,transparent)}
+.rbd-is-editing .rbd-drop-zone.rbd-zone-active{background:var(--rbd-accent);opacity:1}
+.rbd-is-editing .rbd-drag-handle{top:7px;left:8px;max-width:58px;overflow:hidden;padding:2px 5px;font-size:.62rem;line-height:1.2;white-space:nowrap}
+.rbd-is-editing .rbd-widget-title{padding-right:6px}
