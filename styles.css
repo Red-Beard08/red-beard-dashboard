@@ -98,3 +98,13 @@
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-top{top:-10px!important;height:6px!important;left:24%!important;right:24%!important;font-size:0!important;border-radius:4px}
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left,.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{top:24%!important;bottom:24%!important;width:5px!important;font-size:0!important}
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left{left:-8px!important}.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{right:-8px!important}
+
+/* Use the same packed coordinates after leaving edit mode. This keeps the
+   saved dashboard visually identical to the editor instead of handing the
+   cards back to a shared-row CSS grid. */
+.rbd-grid.rbd-masonry{display:block;position:relative;min-height:120px;grid-template-columns:none;grid-auto-rows:none;gap:0}
+.rbd-grid.rbd-masonry>.rbd-widget{position:absolute;box-sizing:border-box;left:var(--rbd-edit-left);top:var(--rbd-edit-top);width:var(--rbd-edit-width);grid-column:auto!important;grid-row:auto!important}
+@media(max-width:600px){
+  .rbd-grid.rbd-masonry{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:minmax(120px,auto);gap:var(--rbd-gap);min-height:0!important}
+  .rbd-grid.rbd-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important}
+}
