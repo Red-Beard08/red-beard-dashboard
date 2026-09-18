@@ -18,8 +18,11 @@ export default class RedBeardDashboard extends Plugin{
  registerModule(def:DashboardModuleDefinition){const previous=this.modules.get(def.id);this.modules.set(def.id,def);if(typeof this.settings.moduleVisibility[def.id]!=="boolean")this.settings.moduleVisibility[def.id]=true;void this.saveSettings();void this.refreshViews();return()=>{if(this.modules.get(def.id)===def){if(previous)this.modules.set(def.id,previous);else this.modules.delete(def.id);void this.refreshViews();}};}
  getQuickActions():DashboardQuickActionDefinition[]{return DEFAULT_QUICK_ACTIONS;}
  getModules():DashboardModuleDefinition[]{return [...this.modules.values()];}
+ getWidgets():DashboardWidgetDefinition[]{return [...this.widgets.values()];}
  openCardManager(kind:"quick-actions"|"modules"){new DashboardCardManagerModal(this.app,this,kind).open();}
+ openWidgetManager(){new DashboardCardManagerModal(this.app,this,"widgets").open();}
  isModuleEnabled(id:string){return this.settings.moduleVisibility[id]!==false;}
+ isWidgetVisible(id:string){return this.layout[id]?.visible!==false;}
  layoutFor(def:DashboardWidgetDefinition){return this.layout[def.id]??defaultLayouts()[def.id]??{x:1,w:4,mobileW:12,h:1,order:99,visible:true,locked:false};}
  context():DashboardContext{return{app:this.app,vault:this.app.vault,settings:this.settings,layout:this.layout,refresh:()=>this.refreshViews(),openNote:p=>this.openNote(p),notice:m=>new Notice(m)};}
  async saveSettings(){await this.saveData({...this.settings,layout:this.layout});}
