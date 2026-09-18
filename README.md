@@ -6,7 +6,7 @@ An extensible, responsive Obsidian homepage by Red-Beard. It recreates the visua
 
 Copy `main.js`, `manifest.json`, and `styles.css` to `.obsidian/plugins/red-beard-dashboard/`, enable the plugin, and use the ribbon icon or **Open dashboard** command. The dashboard is mobile-compatible and uses a 12-column desktop grid that becomes one column on narrow screens. Open **Settings** to configure storage paths, spacing, breakpoint, refresh, startup, and maintenance actions.
 
-Use **Edit layout** to expose safe drag handles and precise width/mobile-width/height controls. Use **Import/re-import legacy dashboard** only when you want to reorder the native widgets from the legacy page; the source note remains byte-for-byte untouched. Migration and maintenance controls are intentionally kept in Settings.
+Use **Edit layout** to expose safe drag handles and precise width/mobile-width/height controls. While editing, the **Manage** action on Quick Actions or Modules opens a focused manager where you can hide entries, reorder them, and choose Standard, Blue highlight, Red highlight, or Hollow styling. Use **Import/re-import legacy dashboard** only when you want to reorder the native widgets from the legacy page; the source note remains byte-for-byte untouched. Migration and maintenance controls are intentionally kept in Settings.
 
 ## Widget extensions
 

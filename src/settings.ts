@@ -1,5 +1,6 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import type RedBeardDashboard from "./main";
+import { DashboardCardManagerModal } from "./modals";
 import { normalizeSettings } from "./utils";
 export class DashboardSettingsTab extends PluginSettingTab{
  constructor(app:App,private plugin:RedBeardDashboard){super(app,plugin);}
@@ -9,6 +10,8 @@ export class DashboardSettingsTab extends PluginSettingTab{
   new Setting(c).setName("Dashboard and appearance").setHeading();this.number(c,"Mobile breakpoint","Pixels before widgets stack.","mobileBreakpoint",320,2400);this.number(c,"Widget gap","Spacing between cards in pixels.","gap",0,64);this.number(c,"Page padding","Outer page padding in pixels.","padding",0,96);
   new Setting(c).setName("Modules").setHeading();
   c.createEl("p",{text:"Choose which registered app dashboards appear in the Modules card. Other Red-Beard add-ons can register here without changing this plugin."});
+  new Setting(c).setName("Quick Actions").setDesc("Choose, order, and style the shortcuts shown on the dashboard.").addButton(b=>b.setButtonText("Manage quick actions").onClick(()=>new DashboardCardManagerModal(this.app,this.plugin,"quick-actions").open()));
+  new Setting(c).setName("Module presentation").setDesc("Choose, order, and style connected app launchers.").addButton(b=>b.setButtonText("Manage modules").onClick(()=>new DashboardCardManagerModal(this.app,this.plugin,"modules").open()));
   const modules=[...this.plugin.modules.values()].sort((a,b)=>(this.plugin.settings.moduleOrder[a.id]??a.order??99)-(this.plugin.settings.moduleOrder[b.id]??b.order??99)||a.name.localeCompare(b.name));
   modules.forEach((module,index)=>{const setting=new Setting(c).setName(module.name).setDesc(module.description??module.command);setting.addToggle(t=>t.setValue(this.plugin.isModuleEnabled(module.id)).onChange(async enabled=>{this.plugin.settings.moduleVisibility[module.id]=enabled;await this.plugin.saveSettings();await this.plugin.refreshViews();}));setting.addText(t=>t.setValue(String(index+1)).setPlaceholder(String(index+1)).onChange(async value=>{const next=Math.max(1,Math.min(modules.length,Number(value)||index+1));this.plugin.settings.moduleOrder[module.id]=next;this.normalizeModuleOrder(modules);await this.plugin.saveSettings();this.display();}));if(index>0)setting.addButton(b=>b.setButtonText("↑").setTooltip("Move up").onClick(async()=>{this.moveModule(modules,index,-1);await this.plugin.saveSettings();this.display();}));if(index<modules.length-1)setting.addButton(b=>b.setButtonText("↓").setTooltip("Move down").onClick(async()=>{this.moveModule(modules,index,1);await this.plugin.saveSettings();this.display();}));});
   new Setting(c).setName("Connected modules").setDesc("Refresh this list after enabling or reloading an add-on.").addButton(b=>b.setButtonText("Refresh module list").onClick(async()=>{await this.plugin.refreshViews();this.display();}));

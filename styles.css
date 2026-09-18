@@ -158,3 +158,36 @@ body.is-mobile .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px
 .red-beard-dashboard.rbd-is-mobile .rbd-widget-title{position:relative!important;display:flex!important;min-height:0!important;transform:none!important}
 .red-beard-dashboard.rbd-is-mobile .rbd-widget-body{position:relative!important;display:flex!important;min-height:0!important;height:auto!important;transform:none!important;overflow:visible!important}
 .red-beard-dashboard.rbd-is-mobile .rbd-toolbar{position:relative!important;display:flex!important;clear:both!important;transform:none!important}
+
+/* Dashboard-owned launcher styling.  These classes are deliberately applied
+   to individual buttons, so a highlighted action never recolors the whole
+   card or affects a contributing add-on's widget. */
+.rbd-action-button.rbd-highlight-blue,.rbd-module-button.rbd-highlight-blue{border-color:#4389e8;background:color-mix(in srgb,#4389e8 22%,var(--background-secondary));color:var(--text-normal)}
+.rbd-action-button.rbd-highlight-red,.rbd-module-button.rbd-highlight-red{border-color:#d05a5a;background:color-mix(in srgb,#d05a5a 20%,var(--background-secondary));color:var(--text-normal)}
+.rbd-action-button.rbd-highlight-hollow,.rbd-module-button.rbd-highlight-hollow{border:1px solid var(--rbd-accent);background:transparent;box-shadow:none;color:var(--text-normal)}
+.rbd-action-button.rbd-highlight-blue:hover,.rbd-module-button.rbd-highlight-blue:hover{background:color-mix(in srgb,#4389e8 32%,var(--background-secondary))}
+.rbd-action-button.rbd-highlight-red:hover,.rbd-module-button.rbd-highlight-red:hover{background:color-mix(in srgb,#d05a5a 30%,var(--background-secondary))}
+.rbd-card-manage-button{margin-left:auto!important;padding:3px 8px!important;border:1px solid var(--rbd-border)!important;background:var(--background-modifier-hover)!important;color:var(--text-muted)!important;font-size:.72rem!important;font-weight:600}
+.rbd-card-manage-button:hover{border-color:var(--rbd-accent)!important;color:var(--text-normal)!important}
+
+/* The manager uses one intentional scroll region and a sticky action footer,
+   keeping every item and Save button reachable in a narrow Obsidian pane. */
+.rbd-card-manager-modal{width:min(720px,calc(100vw - 24px))!important;max-width:none!important}
+.rbd-card-manager-content{display:flex;max-height:min(78vh,720px);flex-direction:column;overflow:hidden;padding-bottom:env(safe-area-inset-bottom,0px)}
+.rbd-card-manager-content h2{margin-top:0}
+.rbd-card-manager-intro{margin-top:0;color:var(--text-muted)}
+.rbd-card-manager-list{min-height:0;overflow-y:auto;padding:4px 2px 28px}
+.rbd-card-manager-row{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(135px,170px) auto;align-items:center;gap:10px;margin:6px 0;padding:10px 12px;border:1px solid var(--rbd-border);border-radius:12px;background:var(--background-secondary)}
+.rbd-card-manager-row>input{margin:0;width:18px;height:18px}
+.rbd-card-manager-copy{min-width:0}.rbd-card-manager-name{font-weight:650}.rbd-card-manager-description{overflow:hidden;color:var(--text-muted);font-size:.78rem;text-overflow:ellipsis;white-space:nowrap}
+.rbd-card-manager-style{width:100%;min-height:32px}
+.rbd-card-manager-order{display:flex;gap:4px}.rbd-card-manager-order button{min-width:30px;padding:4px 7px}
+.rbd-card-manager-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;padding:12px 0 0;border-top:1px solid var(--rbd-border)}
+@media(max-width:600px){
+  .rbd-card-manager-modal{width:calc(100vw - 16px)!important;margin:8px!important}
+  .rbd-card-manager-content{max-height:calc(100dvh - 32px);padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+  .rbd-card-manager-row{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;padding:9px}
+  .rbd-card-manager-style{grid-column:2;grid-row:2;width:100%}
+  .rbd-card-manager-order{grid-column:3;grid-row:1;align-self:start}
+  .rbd-card-manage-button{min-height:28px!important}
+}
