@@ -18,7 +18,7 @@ Module settings include a display position and optional flavor text. Position `1
 
 Markdown widget definitions may be placed in `Dashboard/Widgets/` with `type: dashboard-widget`, `widget_id`, `title`, and `enabled` properties. Markdown definitions reference built-in renderers only and never execute arbitrary JavaScript.
 
-Built-in widgets replace the homepage's core Dataview widgets: Quick Actions, Modules, Quote of the Day, Recently Changed, Favorites, Active Projects, Recent Journal, and Vault Pulse. Legacy Dataview blocks remain available on the original page. Missing registered widgets appear as recoverable placeholders when enabled in settings.
+Built-in widgets replace the homepage's core Dataview widgets: Quick Actions, Modules, Recently Changed, Favorites, Active Projects, Recent Journal, and Vault Pulse. Quote of the Day is supplied by Quote Library so there is one authoritative quote widget rather than a duplicate Dashboard copy. Legacy Dataview blocks remain available on the original page. Missing registered widgets appear as recoverable placeholders when enabled in settings.
 
 The Settings → Widgets section is the authoritative global list. A hidden widget remains registered and keeps its layout, but is omitted from the dashboard until enabled again. This applies equally to built-in widgets, add-on widgets, and safe Markdown widget definitions.
 
