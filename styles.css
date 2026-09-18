@@ -146,3 +146,15 @@ body.is-mobile .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px
 .rbd-is-mobile .rbd-grid.rbd-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important;min-height:0!important;height:auto!important;overflow:visible!important}
 .rbd-is-mobile .rbd-toolbar{margin:24px 0 calc(8px + env(safe-area-inset-bottom,0px));padding:5px 0;gap:6px;opacity:.72}
 .rbd-is-mobile .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px;font-size:.68rem}
+
+/* Native mobile flow: Platform.isMobile is authoritative in Obsidian.  These
+   rules are deliberately last and scoped to the class added by the view so a
+   desktop theme or a misleading web viewport cannot resurrect absolute card
+   coordinates on iOS. */
+.red-beard-dashboard.rbd-is-mobile{display:block!important;height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+.red-beard-dashboard.rbd-is-mobile .rbd-grid{display:block!important;position:relative!important;height:auto!important;min-height:0!important;margin-bottom:24px!important;overflow:visible!important}
+.red-beard-dashboard.rbd-is-mobile .rbd-grid>.rbd-mobile-flow-card{display:block!important;position:relative!important;float:none!important;box-sizing:border-box!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;width:auto!important;height:auto!important;min-height:0!important;grid-column:auto!important;grid-row:auto!important;transform:none!important;z-index:auto!important;overflow:visible!important}
+.red-beard-dashboard.rbd-is-mobile .rbd-mobile-flow-card:last-child{margin-bottom:0!important}
+.red-beard-dashboard.rbd-is-mobile .rbd-widget-title{position:relative!important;display:flex!important;min-height:0!important;transform:none!important}
+.red-beard-dashboard.rbd-is-mobile .rbd-widget-body{position:relative!important;display:flex!important;min-height:0!important;height:auto!important;transform:none!important;overflow:visible!important}
+.red-beard-dashboard.rbd-is-mobile .rbd-toolbar{position:relative!important;display:flex!important;clear:both!important;transform:none!important}
