@@ -52,7 +52,7 @@
 .rbd-column-drop-zone:hover,.rbd-column-drop-zone.rbd-zone-active{background:color-mix(in srgb,var(--rbd-accent) 18%,transparent);box-shadow:0 0 0 2px var(--rbd-accent-soft)}
 @media(max-width:600px){.rbd-column-drop-grid{grid-template-columns:1fr;gap:10px}.rbd-column-drop-zone{grid-column:1;min-height:50px}.rbd-widget.rbd-editing .rbd-widget-title{padding-left:58px}}
 
-/* Editor polish: controls have their own compact row and side zones are visual affordances. */
+/* Editor polish: controls have their own compact row and vertical zones are visual affordances. */
 .rbd-widget.rbd-editing .rbd-widget-title{display:flex;min-height:24px;margin-bottom:7px;padding-left:66px;line-height:1.2}
 .rbd-widget.rbd-editing .rbd-widget-controls{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:0 0 10px;padding:6px 0;border-top:1px solid color-mix(in srgb,var(--rbd-border) 70%,transparent);border-bottom:1px solid color-mix(in srgb,var(--rbd-border) 70%,transparent)}
 .rbd-widget.rbd-editing .rbd-widget-controls button{min-height:28px}
@@ -98,6 +98,11 @@
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-top{top:-10px!important;height:6px!important;left:24%!important;right:24%!important;font-size:0!important;border-radius:4px}
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left,.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{top:24%!important;bottom:24%!important;width:12px!important;font-size:0!important}
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left{left:-15px!important}.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{right:-15px!important}
+
+/* Vertical insertion is the only card-to-card drop interaction.  Side zones
+   are intentionally hidden; use the column drop row to start a new column. */
+.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left,.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{display:none!important}
+.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-bottom{display:flex!important;top:auto!important;bottom:-10px!important;height:6px!important;left:24%!important;right:24%!important;font-size:0!important;border-radius:4px}
 
 /* Use the same packed coordinates after leaving edit mode. This keeps the
    saved dashboard visually identical to the editor instead of handing the
