@@ -14,6 +14,8 @@ Other plugins can obtain the plugin instance and call `registerWidget(definition
 
 Other add-ons can also expose a dashboard button through `registerModule({ id, name, command, icon, description, order })`. Registered modules appear in the Modules card and in Settings, where users can enable or disable them. Module ownership lives with the contributing add-on, so a disabled or unavailable add-on disappears automatically while its visibility preference is retained. Registration tolerates slow plugin startup, so modules such as Vault Backup can appear even when their add-on loads after the dashboard.
 
+Module settings include a display position and optional flavor text. Position `1` is first; entering a position already used by another module shifts the intervening modules down and renumbers the complete list. Flavor text replaces the registering add-on's default description on the dashboard card, and can be left blank to show only the module name. The same controls are available from the Modules manager opened during layout editing.
+
 Markdown widget definitions may be placed in `Dashboard/Widgets/` with `type: dashboard-widget`, `widget_id`, `title`, and `enabled` properties. Markdown definitions reference built-in renderers only and never execute arbitrary JavaScript.
 
 Built-in widgets replace the homepage's core Dataview widgets: Quick Actions, Modules, Quote of the Day, Recently Changed, Favorites, Active Projects, Recent Journal, and Vault Pulse. Legacy Dataview blocks remain available on the original page. Missing registered widgets appear as recoverable placeholders when enabled in settings.
