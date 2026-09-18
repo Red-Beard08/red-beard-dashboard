@@ -108,3 +108,20 @@
   .rbd-grid.rbd-masonry{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:minmax(120px,auto);gap:var(--rbd-gap);min-height:0!important}
   .rbd-grid.rbd-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important}
 }
+
+/* The toolbar is a secondary utility strip, not dashboard content. It is
+   rendered after the widgets and kept visually quiet so the useful cards get
+   the first attention on both desktop and mobile. */
+.rbd-toolbar{order:10;margin:28px 0 0;padding:7px 10px;justify-content:flex-end;border-color:transparent;background:transparent;box-shadow:none;opacity:.78}
+.rbd-toolbar button{min-height:28px;padding:4px 10px;font-size:.76rem}
+.rbd-toolbar button:first-child{background:var(--background-modifier-hover);color:var(--text-muted)}
+@media(max-width:600px){
+  .rbd-toolbar{margin:24px 0 calc(8px + env(safe-area-inset-bottom,0px));padding:5px 0;gap:6px;opacity:.72}
+  .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px;font-size:.68rem}
+  .rbd-grid.rbd-masonry>.rbd-widget{min-height:0!important;height:auto!important;overflow:visible}
+  .rbd-widget-body{min-height:0}
+  .rbd-action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .rbd-action-grid button{width:100%;min-height:42px!important;white-space:normal}
+  .rbd-module-grid{gap:8px}
+  .rbd-module-button{min-height:52px!important}
+}
