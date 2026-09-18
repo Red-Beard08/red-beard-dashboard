@@ -96,8 +96,8 @@
    card-scoped rules are intentionally more specific, so these selectors
    explicitly win without changing the normal viewing layout. */
 .rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-top{top:-10px!important;height:6px!important;left:24%!important;right:24%!important;font-size:0!important;border-radius:4px}
-.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left,.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{top:24%!important;bottom:24%!important;width:5px!important;font-size:0!important}
-.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left{left:-8px!important}.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{right:-8px!important}
+.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left,.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{top:24%!important;bottom:24%!important;width:12px!important;font-size:0!important}
+.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-left{left:-15px!important}.rbd-is-editing .rbd-widget.rbd-editing .rbd-drop-right{right:-15px!important}
 
 /* Use the same packed coordinates after leaving edit mode. This keeps the
    saved dashboard visually identical to the editor instead of handing the
