@@ -139,3 +139,10 @@ body.is-mobile .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px
   .rbd-toolbar{margin:24px 0 calc(8px + env(safe-area-inset-bottom,0px));padding:5px 0;gap:6px;opacity:.72}
   .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px;font-size:.68rem}
 }
+
+/* Platform.isMobile adds this class from the plugin itself, so this remains
+   reliable in Obsidian's native iOS webview even when viewport CSS lies. */
+.rbd-is-mobile .rbd-grid.rbd-masonry{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;gap:var(--rbd-gap)!important;min-height:0!important}
+.rbd-is-mobile .rbd-grid.rbd-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important;min-height:0!important;height:auto!important;overflow:visible!important}
+.rbd-is-mobile .rbd-toolbar{margin:24px 0 calc(8px + env(safe-area-inset-bottom,0px));padding:5px 0;gap:6px;opacity:.72}
+.rbd-is-mobile .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px;font-size:.68rem}
