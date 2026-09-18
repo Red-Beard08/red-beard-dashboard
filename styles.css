@@ -125,3 +125,17 @@
   .rbd-module-grid{gap:8px}
   .rbd-module-button{min-height:52px!important}
 }
+
+/* Obsidian's iOS webview can report a desktop-sized CSS viewport while still
+   rendering in a narrow mobile pane. Use its mobile body marker as the
+   authoritative signal so absolute desktop coordinates never overlap cards. */
+body.is-mobile .rbd-grid.rbd-masonry{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;gap:var(--rbd-gap)!important;min-height:0!important}
+body.is-mobile .rbd-grid.rbd-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important;min-height:0!important;height:auto!important;overflow:visible!important}
+body.is-mobile .rbd-toolbar{margin:24px 0 calc(8px + env(safe-area-inset-bottom,0px));padding:5px 0;gap:6px;opacity:.72}
+body.is-mobile .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px;font-size:.68rem}
+@media(max-width:900px){
+  .rbd-grid.rbd-masonry{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important;gap:var(--rbd-gap)!important;min-height:0!important}
+  .rbd-grid.rbd-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important;min-height:0!important;height:auto!important;overflow:visible!important}
+  .rbd-toolbar{margin:24px 0 calc(8px + env(safe-area-inset-bottom,0px));padding:5px 0;gap:6px;opacity:.72}
+  .rbd-toolbar button{flex:0 0 auto;min-height:28px;padding:4px 8px;font-size:.68rem}
+}
