@@ -5,8 +5,18 @@ import { DashboardSettingsTab } from "./settings";
 import { DASHBOARD_VIEW, DEFAULT_QUICK_ACTIONS, type DashboardContext, type DashboardModuleDefinition, type DashboardQuickActionDefinition, type DashboardSettings, type DashboardWidgetDefinition, type WidgetLayout } from "./types";
 import { defaultLayouts, defaultSettings, normalizeSettings, readManagedLayout, sanitizeLayout, writeLayoutNote, WIDGET_ORDER } from "./utils";
 
-const FALLBACKS:Record<string,string>={"quote-library:open-dashboard":"quote-library-dashboard","scripture-library:open-dashboard":"scripture-library-dashboard","movie-library:open-dashboard":"movie-library-dashboard","study-planner:open-dashboard":"study-planner-dashboard","mens-study-planner:open-dashboard":"mens-study-planner-dashboard","marriage-companion:open-dashboard":"marriage-companion-dashboard","vault-backup:open-dashboard":"vault-backup-dashboard","prayer-library:open-dashboard":"prayer-library-dashboard","journal-companion:open-dashboard":"journal-companion-dashboard"};
-function execute(app:App,id:string){const c=(app as App&{commands?:{executeCommandById:(id:string)=>boolean}}).commands;if(c?.executeCommandById(id))return;void app.workspace.getLeaf(true).setViewState({type:FALLBACKS[id]??id,active:true});}
+const FALLBACKS:Record<string,string>={"quote-library:open-dashboard":"quote-library-dashboard","scripture-library:open-dashboard":"scripture-library-dashboard","movie-library:open-dashboard":"movie-library-dashboard","study-planner:open-dashboard":"study-planner-dashboard","marriage-companion:open-dashboard":"marriage-companion-dashboard","vault-backup:open-dashboard":"vault-backup-dashboard","prayer-library:open-dashboard":"prayer-library-dashboard","journal-companion:open-dashboard":"journal-companion-dashboard"};
+function resolveCommand(app:App,id:string):string{
+  // If a compatible legacy Study Planner command is present, prefer it so
+  // users keep opening the established data set instead of a blank new root.
+  if(id==="study-planner:open-dashboard"){
+    const commandApi=(app as App&{commands?:{commands?:Record<string,{name?:string}>}}).commands;
+    const alternate=Object.keys(commandApi?.commands??{}).find(candidate=>candidate!==id&&candidate.endsWith(":open-dashboard")&&/study[- ]planner/i.test(`${candidate} ${commandApi?.commands?.[candidate]?.name??""}`));
+    if(alternate)return alternate;
+  }
+  return id;
+}
+function execute(app:App,id:string){const commandId=resolveCommand(app,id);const c=(app as App&{commands?:{executeCommandById:(id:string)=>boolean}}).commands;if(c?.executeCommandById(commandId))return;void app.workspace.getLeaf(true).setViewState({type:FALLBACKS[commandId]??commandId,active:true});}
 function frontmatter(text:string){const out:Record<string,string|boolean>={};if(!text.startsWith("---\n"))return out;const end=text.indexOf("\n---\n",4);if(end<0)return out;for(const line of text.slice(4,end).split("\n")){const m=/^([\w-]+):\s*(.*)$/.exec(line);if(m){const raw=m[2].replace(/^['"]|['"]$/g,"");out[m[1]]=raw==="true"?true:raw==="false"?false:raw;}}return out;}
 function dashboardExcluded(app:App,file:TFile){const value=app.metadataCache.getFileCache(file)?.frontmatter?.dashboard_exclude;return value===true||String(value??"").toLowerCase()==="true";}
 type VaultOrganizerProject={name:string;hub:string;files:number;modified:number};
