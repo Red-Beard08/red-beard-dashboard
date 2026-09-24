@@ -1,4 +1,4 @@
-import { App, Notice, Plugin, TFile, setIcon } from "obsidian";
+import { App, Notice, Plugin, TFile, WorkspaceLeaf, setIcon } from "obsidian";
 import { DashboardView } from "./dashboard";
 import { DashboardCardManagerModal } from "./modals";
 import { DashboardSettingsTab } from "./settings";
@@ -41,7 +41,8 @@ export default class RedBeardDashboard extends Plugin{
  async saveSettings(){await this.saveData({...this.settings,layout:this.layout});}
  async saveLayout(){await this.saveSettings();try{await writeLayoutNote(this.app.vault,this.settings,this.layout);}catch(e){new Notice(`Could not save layout: ${e instanceof Error?e.message:String(e)}`);}await this.refreshViews();}
  async resetLayout(){this.layout=defaultLayouts();await this.saveLayout();new Notice("Dashboard layout reset.");}
- async openDashboard(){this.ensureKnownIntegrations();const leaf=this.app.workspace.getLeaf(true);await leaf.setViewState({type:DASHBOARD_VIEW,active:true});this.app.workspace.revealLeaf(leaf);await this.refreshViews();}
+ private existingDashboardLeaf(): WorkspaceLeaf | null { const leaves=this.app.workspace.getLeavesOfType(DASHBOARD_VIEW); const active=this.app.workspace.activeLeaf; return leaves.find(leaf=>leaf===active)??leaves.find(leaf=>leaf.getViewState().pinned===true)??leaves[0]??null; }
+ async openDashboard(){this.ensureKnownIntegrations();const leaf=this.existingDashboardLeaf()??this.app.workspace.getLeaf(true);await leaf.setViewState({type:DASHBOARD_VIEW,active:true});this.app.workspace.revealLeaf(leaf);await this.refreshViews();}
  openNote(path:string){void this.app.workspace.openLinkText(path.replace(/\.md$/i,""),"",false);}
  openSettings(){const s=(this.app as any).setting;s?.open?.();window.setTimeout(()=>s?.openTabById?.(this.manifest.id),100);}
  toggleEditor(){this.editing=!this.editing;void this.refreshViews();}
