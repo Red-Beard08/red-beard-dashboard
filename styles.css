@@ -31,6 +31,7 @@
 .rbd-widget-body blockquote{margin:0;padding:18px 20px;font-size:1.08em;line-height:1.65}
 .rbd-quote-card{display:flex;width:100%;flex-direction:column;gap:12px}.rbd-quote-card-link{cursor:pointer;border-radius:16px;padding:2px;outline:0;transition:transform .16s ease,background .16s ease,box-shadow .16s ease}.rbd-quote-card-link:hover{background:color-mix(in srgb,var(--rbd-accent) 7%,transparent);transform:translateY(-1px)}.rbd-quote-card-link:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--rbd-accent) 42%,transparent)}.rbd-quote-text{font-family:var(--font-text);font-size:1.1em;letter-spacing:.005em}.rbd-quote-footer{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;padding:0 6px;color:var(--text-muted);font-size:.86em}.rbd-quote-author{font-weight:700;color:var(--text-normal)}.rbd-quote-source{color:var(--text-faint);font-size:.92em}.rbd-quote-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 6px}.rbd-secondary-button{align-self:flex-start;margin-top:2px!important}
 @media(max-width:600px){.rbd-module-grid{grid-template-columns:1fr}.rbd-module-button{min-height:52px!important}.rbd-module-description{white-space:normal}}
+.rbd-quote-attribution{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-top:12px;color:var(--text-muted);font-family:var(--font-interface);font-size:.82em}
 
 /* Keep the editor's 1–12 values meaningful at every responsive width. */
 .rbd-grid{grid-template-columns:repeat(12,minmax(0,1fr))}.rbd-widget{grid-column:span var(--rbd-w)}
