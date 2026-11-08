@@ -14,6 +14,7 @@ export const DEFAULT_QUICK_ACTIONS:DashboardQuickActionDefinition[]=[
  {id:"new-prayer",name:"New Prayer",command:"prayer-library:add-prayer"},
  {id:"new-journal-entry",name:"New Journal Entry",command:"journal-companion:new-today"},
  {id:"new-contact",name:"New Contact",command:"personal-crm:new-contact"},
+ {id:"new-timeline-event",name:"New Timeline Event",command:"visual-timeline:new-event"},
  {id:"pray-now",name:"Pray Now",command:"prayer-library:pray-now"},
  {id:"new-movie",name:"New Movie",command:"movie-library:manual-entry"},
  {id:"new-interaction",name:"New Interaction",command:"shepherds-ledger:record-interaction"}
