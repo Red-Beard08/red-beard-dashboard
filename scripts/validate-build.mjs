@@ -7,11 +7,12 @@ const css = await readFile("styles.css", "utf8");
 const failures = [];
 
 if (manifest.id !== "red-beard-dashboard") failures.push("Unexpected plugin id.");
-if (manifest.version !== "1.3.3") failures.push("Manifest is not version 1.3.3.");
+if (manifest.version !== "1.3.4") failures.push("Manifest is not version 1.3.4.");
 if (!versions[manifest.version]) failures.push("versions.json is missing the current release.");
 if (manifest.isDesktopOnly !== false) failures.push("Dashboard must remain mobile-compatible.");
 if (!main.includes("registerWidget") || !main.includes("red-beard-dashboard-layout")) failures.push("Bundle is missing the public widget/layout contract.");
 if (!main.includes("open-settings") || !main.includes("red-beard-dashboard:managed-start")) failures.push("Bundle is missing settings or managed layout support.");
+if (!main.includes("Click or tap to copy quote and author") || !main.includes("Click or tap to copy passage and reference")) failures.push("Bundle is missing click-to-copy quote or Scripture support.");
 if (!css.includes("safe-area-inset-bottom") || !css.includes("@media")) failures.push("Styles are missing mobile-safe layout rules.");
 if ((await stat("main.js")).size < 5_000) failures.push("main.js appears unexpectedly small.");
 if (/require\(["'](?:fs|path|electron|os|child_process)["']\)/.test(main)) failures.push("main.js contains a desktop-only runtime import.");

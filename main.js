@@ -720,7 +720,7 @@ var styles_default = `/* Native dashboard skin, intentionally aligned with the v
 .rbd-muted{color:var(--text-muted)}.rbd-pulse-metric{font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
 .rbd-link-list{list-style:none!important;padding-left:0!important}.rbd-link-row{display:flex;align-items:center;min-height:30px;margin:2px 0!important;padding:3px 8px;border-radius:8px;transition:background .15s ease}.rbd-link-row:before{content:"";width:5px;height:5px;margin-right:9px;border-radius:50%;background:var(--text-muted);opacity:.7}.rbd-link-row:hover{background:var(--background-modifier-hover)}
 .rbd-widget-body blockquote{margin:0;padding:18px 20px;font-size:1.08em;line-height:1.65}
-.rbd-quote-card{display:flex;width:100%;flex-direction:column;gap:12px}.rbd-quote-card-link{cursor:pointer;border-radius:16px;padding:2px;outline:0;transition:transform .16s ease,background .16s ease,box-shadow .16s ease}.rbd-quote-card-link:hover{background:color-mix(in srgb,var(--rbd-accent) 7%,transparent);transform:translateY(-1px)}.rbd-quote-card-link:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--rbd-accent) 42%,transparent)}.rbd-quote-text{font-family:var(--font-text);font-size:1.1em;letter-spacing:.005em}.rbd-quote-footer{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;padding:0 6px;color:var(--text-muted);font-size:.86em}.rbd-quote-author{font-weight:700;color:var(--text-normal)}.rbd-quote-source{color:var(--text-faint);font-size:.92em}.rbd-quote-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 6px}.rbd-secondary-button{align-self:flex-start;margin-top:2px!important}
+.rbd-quote-card{display:flex;width:100%;flex-direction:column;gap:12px}.rbd-quote-text{font-family:var(--font-text);font-size:1.1em;letter-spacing:.005em}.rbd-copyable{cursor:pointer;transition:background .15s ease,box-shadow .15s ease}.rbd-copyable:hover{background:color-mix(in srgb,var(--rbd-accent) 12%,var(--background-secondary))}.rbd-copyable:focus-visible{outline:2px solid var(--rbd-accent);outline-offset:3px}.rbd-quote-attribution{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-top:12px;color:var(--text-muted);font-family:var(--font-interface);font-size:.82em}.rbd-quote-author{font-weight:700;color:var(--text-normal)}.rbd-quote-source{color:var(--text-faint);font-size:.92em}.rbd-quote-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 6px}.rbd-secondary-button{align-self:flex-start;margin-top:2px!important}
 @media(max-width:600px){.rbd-module-grid{grid-template-columns:1fr}.rbd-module-button{min-height:52px!important}.rbd-module-description{white-space:normal}}
 .rbd-quote-attribution{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-top:12px;color:var(--text-muted);font-family:var(--font-interface);font-size:.82em}
 
@@ -784,7 +784,7 @@ var styles_default = `/* Native dashboard skin, intentionally aligned with the v
   .rbd-is-editing .rbd-grid.rbd-editing-masonry>.rbd-widget{position:relative!important;left:auto!important;top:auto!important;width:auto!important;grid-column:1!important;grid-row:auto!important}
 }
 
-.rbd-prayer-list{display:grid;gap:8px;width:100%;margin:10px 0}.rbd-prayer-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--rbd-border);border-radius:12px;background:linear-gradient(135deg,var(--rbd-card),color-mix(in srgb,var(--rbd-accent) 7%,var(--rbd-card)))}.rbd-prayer-copy{min-width:0}.rbd-prayer-copy strong{display:block}.rbd-prayer-copy small{color:var(--text-muted)}.rbd-prayer-copy p{margin:.3rem 0 0;color:var(--text-muted);font-size:.84em;white-space:pre-line}.rbd-prayer-row button{white-space:nowrap}.rbd-scripture-card{display:flex;width:100%;flex-direction:column;gap:10px;padding:14px 16px;border:1px solid var(--rbd-border);border-radius:16px;background:linear-gradient(135deg,var(--rbd-card),color-mix(in srgb,var(--rbd-accent) 8%,var(--rbd-card)));box-shadow:0 8px 24px #0001}.rbd-scripture-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.rbd-scripture-card blockquote{margin:0;padding:14px 16px;border-left:4px solid var(--rbd-accent);border-radius:0 12px 12px 0;background:var(--rbd-accent-soft);white-space:pre-line;line-height:1.6}.rbd-scripture-card .rbd-muted{margin:0}@media(max-width:600px){.rbd-prayer-row{grid-template-columns:1fr}.rbd-prayer-row button{width:100%}.rbd-scripture-heading{align-items:flex-start;flex-direction:column}}
+.rbd-prayer-list{display:grid;gap:8px;width:100%;margin:10px 0}.rbd-prayer-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--rbd-border);border-radius:12px;background:linear-gradient(135deg,var(--rbd-card),color-mix(in srgb,var(--rbd-accent) 7%,var(--rbd-card)))}.rbd-prayer-copy{min-width:0}.rbd-prayer-copy strong{display:block}.rbd-prayer-copy small{color:var(--text-muted)}.rbd-prayer-copy p{margin:.3rem 0 0;color:var(--text-muted);font-size:.84em;white-space:pre-line}.rbd-prayer-row button{white-space:nowrap}.rbd-scripture-card{display:flex;width:100%;flex-direction:column;gap:10px;padding:14px 16px;border:1px solid var(--rbd-border);border-radius:16px;background:linear-gradient(135deg,var(--rbd-card),color-mix(in srgb,var(--rbd-accent) 8%,var(--rbd-card)));box-shadow:0 8px 24px #0001}.rbd-scripture-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.rbd-scripture-card blockquote{margin:0;padding:14px 16px;border-left:4px solid var(--rbd-accent);border-radius:0 12px 12px 0;background:var(--rbd-accent-soft);white-space:pre-line;line-height:1.6}.rbd-scripture-card .rbd-muted{margin:0}@media(max-width:600px){.rbd-prayer-row{grid-template-columns:1fr}.rbd-prayer-row button{width:100%}.rbd-scripture-heading{align-items:flex-start;flex-direction:column}}.rbd-scripture-card blockquote.rbd-copyable:hover{background:color-mix(in srgb,var(--rbd-accent) 17%,var(--rbd-card))}
 
 /* Keep the insertion marker fully inside the masonry gap.  The earlier
    card-scoped rules are intentionally more specific, so these selectors
@@ -1153,9 +1153,22 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
         return;
       }
       const text = String(item.meta.quote_text).replace(/^['"]|['"]$/g, "");
-      container.createEl("blockquote", { cls: "rbd-quote-text", text });
       const author = String((_a = item.meta.quote_author) != null ? _a : "").trim(), source = String((_b = item.meta.quote_source) != null ? _b : "").trim();
-      if (author || source) container.createDiv({ cls: "rbd-quote-footer", text: [author ? `\u2014 ${author}` : "", source].filter(Boolean).join(" \xB7 ") });
+      const quoteBox = container.createEl("blockquote", { cls: "rbd-quote-text rbd-copyable", attr: { role: "button", tabindex: "0", title: "Click or tap to copy quote and author", "aria-label": `Copy quote${author ? ` by ${author}` : ""}` } });
+      quoteBox.createDiv({ text });
+      if (author || source) {
+        const attribution = quoteBox.createDiv({ cls: "rbd-quote-attribution" });
+        if (author) attribution.createSpan({ cls: "rbd-quote-author", text: `\u2014 ${author}` });
+        if (source) attribution.createSpan({ cls: "rbd-quote-source", text: source });
+      }
+      const copy = () => void this.copyText(`\u201C${text}\u201D${author ? ` \u2014 ${author}` : ""}`, "Quote");
+      quoteBox.onclick = copy;
+      quoteBox.onkeydown = (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          copy();
+        }
+      };
       const button = container.createEl("button", { text: "Open quote" });
       button.onclick = () => this.openNote(item.file.path);
     };
@@ -1221,12 +1234,28 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
       const card = container.createDiv({ cls: "rbd-scripture-card" }), heading = card.createDiv({ cls: "rbd-scripture-heading" });
       heading.createEl("strong", { text: String(passage.reference || "Scripture") });
       if (passage.translation) heading.createEl("span", { text: String(passage.translation), cls: "rbd-badge" });
-      card.createEl("blockquote", { text: String(passage.text || "(No passage text yet)") });
+      const verse = card.createEl("blockquote", { text: String(passage.text || "(No passage text yet)"), cls: "rbd-copyable", attr: { role: "button", tabindex: "0", title: "Click or tap to copy passage and reference", "aria-label": `Copy ${String(passage.reference || "Scripture")}` } });
+      const copy = () => void this.copyText(`${String(passage.text || "")}${passage.text ? "\n" : ""}\u2014 ${String(passage.reference || "Scripture")}${passage.translation ? ` (${String(passage.translation)})` : ""}`, "Scripture");
+      verse.onclick = copy;
+      verse.onkeydown = (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          copy();
+        }
+      };
       const details = [passage.book, passage.category].filter(Boolean).join(" \xB7 ");
       if (details) card.createEl("p", { text: details, cls: "rbd-muted" });
       const open = card.createEl("button", { text: "Open passage" });
       open.onclick = () => this.openNote(String(passage.path));
     } });
+  }
+  async copyText(value, label) {
+    try {
+      await navigator.clipboard.writeText(value);
+      new import_obsidian4.Notice(`${label} copied.`);
+    } catch (e) {
+      new import_obsidian4.Notice(`The ${label.toLowerCase()} could not be copied on this device.`);
+    }
   }
   async moveWidget(fromId, toId, side) {
     var _a, _b;
@@ -1491,36 +1520,26 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
     }
     const item = candidates[Math.floor(Date.now() / 864e5) % candidates.length], text = String(item.meta.quote_text).replace(/^['"]|['"]$/g, "");
     const author = String(item.meta.quote_author || "").trim(), source = String(item.meta.quote_source || "").trim();
-    const card = c.createDiv({ cls: "rbd-quote-card rbd-quote-card-link", attr: { role: "link", tabindex: "0", "aria-label": `Open quote${author ? ` by ${author}` : ""}` } });
-    const quoteBox = card.createEl("blockquote", { cls: "rbd-quote-text" });
+    const card = c.createDiv({ cls: "rbd-quote-card" });
+    const quoteBox = card.createEl("blockquote", { cls: "rbd-quote-text rbd-copyable", attr: { role: "button", tabindex: "0", title: "Click or tap to copy quote and author", "aria-label": `Copy quote${author ? ` by ${author}` : ""}` } });
     quoteBox.createDiv({ text });
     if (author || source) {
       const attribution = quoteBox.createDiv({ cls: "rbd-quote-attribution" });
       if (author) attribution.createSpan({ cls: "rbd-quote-author", text: `\u2014 ${author}` });
       if (source) attribution.createSpan({ cls: "rbd-quote-source", text: source });
     }
-    const actions = card.createDiv({ cls: "rbd-quote-actions" });
-    const copy = actions.createEl("button", { text: "Copy", cls: "rbd-secondary-button" });
-    copy.setAttribute("aria-label", "Copy quote and author");
-    copy.onclick = async (event) => {
-      event.stopPropagation();
-      try {
-        await navigator.clipboard.writeText(`\u201C${text}\u201D${author ? ` \u2014 ${author}` : ""}`);
-        new import_obsidian4.Notice("Quote copied.");
-      } catch (e) {
-        new import_obsidian4.Notice("The quote could not be copied on this device.");
-      }
-    };
-    const open = () => {
-      if (!this.editing) this.openNote(item.file.path);
-    };
-    card.onclick = open;
-    card.onkeydown = (e) => {
-      if (e.target instanceof HTMLButtonElement) return;
+    const copy = () => void this.copyText(`\u201C${text}\u201D${author ? ` \u2014 ${author}` : ""}`, "Quote");
+    quoteBox.onclick = copy;
+    quoteBox.onkeydown = (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        open();
+        copy();
       }
+    };
+    const actions = card.createDiv({ cls: "rbd-quote-actions" });
+    const open = actions.createEl("button", { text: "Open quote", cls: "rbd-secondary-button" });
+    open.onclick = () => {
+      if (!this.editing) this.openNote(item.file.path);
     };
   }
   listWidget(id, name, filter, limit, layout) {
