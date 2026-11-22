@@ -1,6 +1,8 @@
 import type { TFile, Vault } from "obsidian";
 import { normalizeVaultFile, normalizeVaultFolder, replaceManagedBlock } from "./foundation-vendor";
 import { DEFAULT_QUICK_ACTIONS, LAYOUT_END, LAYOUT_START, type CardHighlightStyle, type DashboardSettings, type WidgetLayout } from "./types";
+import { localDateKey } from "./date-utils";
+export const todayIso = (date: Date = new Date()): string => localDateKey(date);
 export const WIDGET_ORDER=["quick-actions","modules","quote-of-day","recently-changed","favorites","active-projects","recent-journal","vault-pulse"];
 export function defaultSettings():DashboardSettings{const root="Dashboard";return{settingsVersion:1,rootFolder:root,folders:{records:"Records",profiles:"Profiles",archive:"Archive",reports:"Reports",backups:"Backups",widgets:"Widgets"},files:{index:"Library Index.md",summary:"Summary.md",journal:"Migration Journal.md",layout:"Layout.md"},naming:{idPrefix:"RBD",filenameTemplate:"{id} - {title}",dateFormat:"yyyy-MM-dd"},taxonomy:{categories:[],statuses:["active","archived"],archived:["archived"]},defaults:{},dashboard:{startup:false,autoRefreshSeconds:0,compact:false},migration:{sourceFolder:"",mode:"copy"},privacy:{showReminder:false},dashboardPath:`${root}/Layout.md`,legacyPath:"Dashboard.md",widgetFolder:`${root}/Widgets`,mobileBreakpoint:700,gap:16,padding:24,showPlaceholders:true,moduleVisibility:{},moduleOrder:{},moduleStyle:{},moduleFlavor:{},quickActionVisibility:{},quickActionOrder:Object.fromEntries(DEFAULT_QUICK_ACTIONS.map((a,i)=>[a.id,i])),quickActionStyle:{}};}
 const num=(v:unknown,f:number,min:number,max:number)=>Number.isFinite(Number(v))?Math.max(min,Math.min(max,Number(v))):f;

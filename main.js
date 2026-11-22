@@ -487,7 +487,16 @@ var DEFAULT_QUICK_ACTIONS = [
   { id: "new-interaction", name: "New Interaction", command: "shepherds-ledger:record-interaction" }
 ];
 
+// src/date-utils.ts
+function localDateKey(date = /* @__PURE__ */ new Date()) {
+  const year = String(date.getFullYear()).padStart(4, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 // src/utils.ts
+var todayIso = (date = /* @__PURE__ */ new Date()) => localDateKey(date);
 var WIDGET_ORDER = ["quick-actions", "modules", "quote-of-day", "recently-changed", "favorites", "active-projects", "recent-journal", "vault-pulse"];
 function defaultSettings() {
   const root = "Dashboard";
@@ -1182,7 +1191,7 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
       var _a, _b;
       container.empty();
       const plugin = ((_b = (_a = this.app.plugins) == null ? void 0 : _a.getPlugin) == null ? void 0 : _b.call(_a, "prayer-library")) || {};
-      const date = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+      const date = todayIso();
       const items = plugin.getDailyPrayers ? await plugin.getDailyPrayers(date, []) : [];
       container.createEl("p", { cls: "rbd-muted", text: items.length ? `${date} \xB7 ${items.length} ${items.length === 1 ? "prayer" : "prayers"}:` : `No prayers scheduled for today.` });
       const list = container.createDiv({ cls: "rbd-prayer-list" });
@@ -1213,7 +1222,7 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
       var _a, _b, _c;
       container.empty();
       const plugin = (_b = (_a = this.app.plugins) == null ? void 0 : _a.getPlugin) == null ? void 0 : _b.call(_a, "scripture-library");
-      const date = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+      const date = todayIso();
       let passage = await ((_c = plugin == null ? void 0 : plugin.getPassageOfDay) == null ? void 0 : _c.call(plugin, date));
       if (!passage) {
         const files = this.app.vault.getMarkdownFiles().map((file) => {
@@ -1567,4 +1576,15 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
       } });
     }
   }
+};
+var dashboardDayOnload = RedBeardDashboard.prototype.onload;
+RedBeardDashboard.prototype.onload = async function() {
+  await dashboardDayOnload.call(this);
+  let observedDate = todayIso();
+  this.registerInterval(window.setInterval(() => {
+    const currentDate = todayIso();
+    if (currentDate === observedDate) return;
+    observedDate = currentDate;
+    void this.refreshViews();
+  }, 6e4));
 };

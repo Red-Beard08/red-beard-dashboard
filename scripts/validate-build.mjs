@@ -7,7 +7,7 @@ const css = await readFile("styles.css", "utf8");
 const failures = [];
 
 if (manifest.id !== "red-beard-dashboard") failures.push("Unexpected plugin id.");
-if (manifest.version !== "1.3.4") failures.push("Manifest is not version 1.3.4.");
+if (manifest.version !== "1.3.5") failures.push("Manifest is not version 1.3.5.");
 if (!versions[manifest.version]) failures.push("versions.json is missing the current release.");
 if (manifest.isDesktopOnly !== false) failures.push("Dashboard must remain mobile-compatible.");
 if (!main.includes("registerWidget") || !main.includes("red-beard-dashboard-layout")) failures.push("Bundle is missing the public widget/layout contract.");
