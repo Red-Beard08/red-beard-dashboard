@@ -1,4 +1,4 @@
-# Red-Beard Dashboard 1.3.0
+# Red-Beard Dashboard 1.3.6
 
 An extensible, responsive Obsidian homepage by Red-Beard. It recreates the visual rhythm of an existing Red-Beard homepage while using native Markdown widgets and a Foundation-shaped registration API. The original page is never overwritten.
 
@@ -15,6 +15,8 @@ Other plugins can obtain the plugin instance and call `registerWidget(definition
 Other add-ons can also expose a dashboard button through `registerModule({ id, name, command, icon, description, order })`. Registered modules appear in the Modules card and in Settings, where users can enable or disable them. Module ownership lives with the contributing add-on, so a disabled or unavailable add-on disappears automatically while its visibility preference is retained. Registration tolerates slow plugin startup, so modules such as Vault Backup can appear even when their add-on loads after the dashboard.
 
 Module settings include a display position and optional flavor text. Position `1` is first; entering a position already used by another module shifts the intervening modules down and renumbers the complete list. Flavor text replaces the registering add-on's default description on the dashboard card, and can be left blank to show only the module name. The same controls are available from the Modules manager opened during layout editing.
+
+Add-ons may register creation shortcuts through `registerQuickAction({ id, name, command, description })`. Use a namespaced stable ID. The returned function unregisters that definition while preserving its saved visibility, position, and styling. A newer registration with the same ID owns the entry; an older cleanup cannot remove it. Quick actions use the same manager and styling as built-in shortcuts. Red-Beard Weather uses this API for **New Weather Snapshot**.
 
 Markdown widget definitions may be placed in `Dashboard/Widgets/` with `type: dashboard-widget`, `widget_id`, `title`, and `enabled` properties. Markdown definitions reference built-in renderers only and never execute arbitrary JavaScript.
 

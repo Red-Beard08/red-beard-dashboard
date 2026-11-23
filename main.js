@@ -952,6 +952,7 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
     this.widgets = /* @__PURE__ */ new Map();
     this.modules = /* @__PURE__ */ new Map();
     this.editing = false;
+    this.quickActions = /* @__PURE__ */ new Map();
   }
   async onload() {
     this.ensureStyles();
@@ -1018,8 +1019,18 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
       }
     };
   }
+  registerQuickAction(def) {
+    this.quickActions.set(def.id, def);
+    void this.refreshViews();
+    return () => {
+      if (this.quickActions.get(def.id) === def) {
+        this.quickActions.delete(def.id);
+        void this.refreshViews();
+      }
+    };
+  }
   getQuickActions() {
-    return DEFAULT_QUICK_ACTIONS;
+    return [...DEFAULT_QUICK_ACTIONS.filter((action) => !this.quickActions.has(action.id)), ...this.quickActions.values()];
   }
   getModules() {
     return [...this.modules.values()];
@@ -1305,10 +1316,9 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
     }
   }
   registerNativeWidgets() {
-    const actions = this.getQuickActions();
     this.registerWidget({ id: "quick-actions", name: "Quick Actions", icon: "zap", defaultLayout: { x: 1, w: 12, mobileW: 12, h: 1, order: 0 }, render: (_, c) => {
       const group = c.createDiv({ cls: "rbd-action-grid" });
-      actions.filter((a) => this.settings.quickActionVisibility[a.id] !== false).sort((a, b) => {
+      this.getQuickActions().filter((a) => this.settings.quickActionVisibility[a.id] !== false).sort((a, b) => {
         var _a, _b;
         return ((_a = this.settings.quickActionOrder[a.id]) != null ? _a : 99) - ((_b = this.settings.quickActionOrder[b.id]) != null ? _b : 99);
       }).forEach((action, index) => {
