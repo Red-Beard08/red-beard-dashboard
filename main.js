@@ -1590,6 +1590,8 @@ var RedBeardDashboard = class extends import_obsidian4.Plugin {
 var dashboardDayOnload = RedBeardDashboard.prototype.onload;
 RedBeardDashboard.prototype.onload = async function() {
   await dashboardDayOnload.call(this);
+  const prayerEvent = this.app.workspace.on("prayer-library:state-changed", () => void this.refreshViews());
+  this.registerEvent(prayerEvent);
   let observedDate = todayIso();
   this.registerInterval(window.setInterval(() => {
     const currentDate = todayIso();

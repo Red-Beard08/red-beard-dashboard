@@ -1,4 +1,4 @@
-import { App, Notice, Plugin, TFile, WorkspaceLeaf, setIcon } from "obsidian";
+import { App, Notice, Plugin, TFile, WorkspaceLeaf, setIcon, type EventRef } from "obsidian";
 import { DashboardView } from "./dashboard";
 import { DashboardCardManagerModal } from "./modals";
 import { DashboardSettingsTab } from "./settings";
@@ -86,6 +86,8 @@ export default class RedBeardDashboard extends Plugin{
 const dashboardDayOnload = RedBeardDashboard.prototype.onload;
 RedBeardDashboard.prototype.onload = async function(this: RedBeardDashboard) {
  await dashboardDayOnload.call(this);
+ const prayerEvent = (this.app.workspace as unknown as { on: (name: string, callback: () => void) => EventRef }).on("prayer-library:state-changed", () => void this.refreshViews());
+ this.registerEvent(prayerEvent);
  let observedDate = todayIso();
  this.registerInterval(window.setInterval(() => {
   const currentDate = todayIso();
