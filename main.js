@@ -28,6 +28,10 @@ var import_obsidian4 = require("obsidian");
 
 // src/dashboard.ts
 var import_obsidian = require("obsidian");
+function observeDashboardLayoutTargets(observer, grid) {
+  observer.observe(grid);
+  grid.querySelectorAll(".rbd-widget").forEach((card) => observer.observe(card));
+}
 var DashboardView = class extends import_obsidian.ItemView {
   constructor(leaf, plugin) {
     super(leaf);
@@ -51,6 +55,10 @@ var DashboardView = class extends import_obsidian.ItemView {
     const mobile = import_obsidian.Platform.isMobile || import_obsidian.Platform.isMobileApp || import_obsidian.Platform.isIosApp;
     (_a = this.editorResizeObserver) == null ? void 0 : _a.disconnect();
     this.editorResizeObserver = void 0;
+    if (this.editorResizeFrame !== void 0) {
+      window.cancelAnimationFrame(this.editorResizeFrame);
+      this.editorResizeFrame = void 0;
+    }
     root.empty();
     root.addClass("red-beard-dashboard");
     root.toggleClass("rbd-is-editing", this.plugin.editing);
@@ -134,8 +142,14 @@ var DashboardView = class extends import_obsidian.ItemView {
     if (!items.length) grid.createEl("p", { text: "No widgets are registered." });
     if (!mobile) {
       this.packMasonryLayout(grid);
-      this.editorResizeObserver = new ResizeObserver(() => this.packMasonryLayout(grid));
-      this.editorResizeObserver.observe(grid);
+      this.editorResizeObserver = new ResizeObserver(() => {
+        if (this.editorResizeFrame !== void 0) return;
+        this.editorResizeFrame = window.requestAnimationFrame(() => {
+          this.editorResizeFrame = void 0;
+          this.packMasonryLayout(grid);
+        });
+      });
+      observeDashboardLayoutTargets(this.editorResizeObserver, grid);
     }
     if (this.plugin.editing) {
       const dropGrid = root.createDiv({ cls: "rbd-column-drop-grid", attr: { "aria-label": "Drop zones for dashboard columns" } });
@@ -282,6 +296,10 @@ var DashboardView = class extends import_obsidian.ItemView {
     var _a;
     (_a = this.editorResizeObserver) == null ? void 0 : _a.disconnect();
     this.editorResizeObserver = void 0;
+    if (this.editorResizeFrame !== void 0) {
+      window.cancelAnimationFrame(this.editorResizeFrame);
+      this.editorResizeFrame = void 0;
+    }
     return Promise.resolve();
   }
 };
